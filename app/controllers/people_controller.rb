@@ -19,7 +19,7 @@ class PeopleController < ApplicationController
   private
 
   def person_attributes
-    params.require(:person).permit(:name, :email, :phone_number)
+    params.require(:person).permit(:name, :email, :phone_number, company_ids: [])
   end
 
 end

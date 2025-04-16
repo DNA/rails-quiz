@@ -1,4 +1,4 @@
-= form_for @company, class: 'row' do |f|
+= form_for @company, class: 'row g-3' do |f|
   - if company.errors.any?
     div.alert.alert-danger
       h4 = "#{pluralize(company.errors.count, "error")} prohibited this company from being saved:"
@@ -9,5 +9,16 @@
   .col-auto
     = f.label :name, class: 'form-label'
     = f.text_field :name, class: 'form-control'
-  .col-auto.mt-4
+
+  .col-auto.mt-3
+    | People
+    div.border.mt-2.p-3.rounded style="max-height: 200px; overflow-y: auto;"
+      - Person.all.each do |person|
+        div.form-check
+          = check_box_tag 'company[person_ids][]', person.id, @company.people.include?(person),
+                          id: "person_#{person.id}",
+                          class: 'form-check-input'
+          = label_tag "person_#{person.id}", "#{person.name} (#{person.email})", class: 'form-check-label'
+
+  .col-auto.mt-3
     = f.submit class: 'btn btn-primary'

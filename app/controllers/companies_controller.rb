@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: %i[edit update]
+  before_action :set_company, only: %i[edit update people]
 
   def index
     @companies = Company.includes(:people)
@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      redirect_to @company, notice: "Company was successfully created."
+      redirect_to companies_path, notice: "Company was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
 
   def update
     if @company.update(company_params)
-      redirect_to @company, notice: "Company was successfully updated."
+      redirect_to companies_path, notice: "Company was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,6 +36,6 @@ class CompaniesController < ApplicationController
     end
 
     def company_params
-      params.fetch(:company, {}).permit(:name)
+      params.fetch(:company, {}).permit(:name, person_ids: [])
     end
 end

@@ -13,7 +13,7 @@ table.table
         th[scope="row"]= company.id
         td= company.name
         td
-          ul
+          ul.m-0
             - company.people.each do |person|
               li= "#{person.name} (#{person.email})"
         td

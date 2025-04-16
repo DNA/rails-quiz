@@ -15,7 +15,7 @@ table.table
         td= person.try(:name)
         td= person.try(:phone)
         td= person.try(:email)
-        td= person.try(:company).try(:name)
-
-
-
+        td
+          ul.m-0
+            - person.companies.each do |company|
+              li= company.name
