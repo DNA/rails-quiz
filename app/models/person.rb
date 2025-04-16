@@ -14,7 +14,12 @@
 class Person < ApplicationRecord
   has_and_belongs_to_many :companies
 
-  validates :name, :phone_number, :email, presence: true
+  validates :name, :phone_number, :email_confirmation, presence: true
+  validates :email, confirmation: true,
+                    format: {
+                      with: URI::MailTo::EMAIL_REGEXP,
+                      message: 'is not a valid email address'
+                    }
 
   accepts_nested_attributes_for :companies
 end
