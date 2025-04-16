@@ -41,3 +41,5 @@ end
 
 # Use Redis for Action Cable
 gem "redis", "~> 4.0"
+
+gem "kaminari", "~> 1.2"
