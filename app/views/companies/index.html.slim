@@ -1,0 +1,20 @@
+h2 Viewing companies
+
+table.table
+  thead
+    tr
+      th[scope="col"] ID
+      th[scope="col"] Name
+      th[scope="col"] People
+      th[scope="col"] Actions
+  tbody
+    - @companies.each do |company|
+      tr
+        th[scope="row"]= company.id
+        td= company.name
+        td
+          ul
+            - company.people.each do |person|
+              li= "#{person.name} (#{person.email})"
+        td
+          =link_to 'Edit', edit_company_path(company), class: 'btn btn-sm btn-primary'
